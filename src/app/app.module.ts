@@ -6,11 +6,13 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { TreeViewComponent } from './tree-view/tree-view.component';
 import { TreeViewItemComponent } from './tree-view-item/tree-view-item.component';
+import { TreeViewSectionComponent } from './tree-view-section/tree-view-section.component';
 
 @NgModule({
   declarations: [
       AppComponent,
       TreeViewComponent,
+      TreeViewSectionComponent,
       TreeViewItemComponent
   ],
   imports: [

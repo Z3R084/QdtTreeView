@@ -1,1 +1,2 @@
-﻿{{ treeViewItem.name }}
+﻿<i class="glyphicon" [ngClass]="{'glyphicon-chevron-right': true}"></i>{{ treeViewItem.name }}
+<tree-view-section *ngIf="treeViewItem.subitems.length > 0" [treeViewItems]="treeViewItem.subitems"></tree-view-section>
