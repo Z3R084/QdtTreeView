@@ -4,7 +4,8 @@
     "\\src",
     "\\src\\app",
     "\\src\\app\\tree-view",
-    "\\src\\app\\tree-view-item"
+    "\\src\\app\\tree-view-item",
+    "\\src\\app\\tree-view-section"
   ],
-  "SelectedNode": "\\src\\app\\tree-view\\New File"
+  "SelectedNode": "\\src\\app\\tree-view-item\\tree-view-item.component.html"
 }

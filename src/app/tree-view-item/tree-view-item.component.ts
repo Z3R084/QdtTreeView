@@ -7,6 +7,6 @@
 
 export class TreeViewItemComponent {
     @Input() treeViewItem: Object;
-
+    isOpen: boolean = false;
     constructor() { }
 }

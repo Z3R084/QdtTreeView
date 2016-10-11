@@ -1,8 +1,71 @@
-ul {
+/*tree-view-section ul {
 	list-style: none;
-	padding-left: 12px;
+	padding: 0;
+	margin: 0;
+}
+
+tree-view-section li {
+	padding: 12px;
 }
 
 i {
 	padding-right: 10px;
+}
+
+tree-view-item {
+	cursor: pointer;
+}
+
+ul > li > tree-view-item > div {
+	padding-left: 12px;
+}
+
+ul > li > tree-view-item > div:hover {
+	background-color: #ebebeb;
+}
+
+tree-view > div {
+	width: 200px;
+	border-right: 1px solid black;
+}*/
+
+i {
+	padding-right: 10px;
+}
+
+tree-view > div {
+	width: 200px;
+	border-right: 1px solid black;
+}
+
+tree-view-section ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+tree-view-section li {
+	padding: 4px 10px;
+}
+
+tree-view-section li:hover {
+	background-color: #ebebeb;
+}
+
+/*tree-view-section li:before {
+	content: '';
+	position: absolute;
+}
+
+tree-view-section li:hover::before {
+	content: '';
+	background-color: #ebebeb;
+	position: absolute;
+	right: 0;
+	left: 0;
+	height: 22px;
+}*/
+
+tree-view-item {
+	cursor: pointer;
 }
