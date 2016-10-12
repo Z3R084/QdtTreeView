@@ -34,6 +34,7 @@ i {
 }
 
 tree-view > div {
+	position: relative;
 	width: 200px;
 	border-right: 1px solid black;
 }
@@ -45,12 +46,40 @@ tree-view-section ul {
 }
 
 tree-view-section li {
-	padding: 4px 10px;
+	padding: 0 10px;
 }
 
-tree-view-section li:hover {
-	background-color: #ebebeb;
+.header {
+	position: relative;
 }
+
+.entry:before {
+	content: '';
+	position: absolute;
+}
+
+.selected:before {
+	content: '';
+	position: absolute;
+	background-color: #dad8f7;
+	left: 0;
+	right: 0;
+	height: 20px;
+}
+
+.entry-hover:before {
+	content: '';
+	position: absolute;
+	background-color: #808080;
+	left: 0;
+	right: 0;
+	height: 20px;
+	/*height: 25px;*/
+}
+
+/*tree-view-section li:hover {
+	background-color: #ebebeb;
+}*/
 
 /*tree-view-section li:before {
 	content: '';

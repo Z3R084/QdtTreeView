@@ -21,4 +21,19 @@
 
 export class TreeViewSectionComponent {
     @Input() treeViewItems: Object[];
+    hoverElement: Object;
+    selectedItem: Object;
+
+    overElement($event: MouseEvent, item: Object): void {
+        $event.stopPropagation();
+        //$event.preventDefault();
+        this.hoverElement = item;
+    }
+
+    selectItem($event: MouseEvent, item: Object): void {
+        $event.stopPropagation();
+        $event.preventDefault();
+        this.selectedItem = null;
+        this.selectedItem = item;
+    }
 }
