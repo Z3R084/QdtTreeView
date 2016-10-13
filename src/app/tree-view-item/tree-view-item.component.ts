@@ -1,4 +1,5 @@
-﻿import { Component, Input } from '@angular/core';
+﻿import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { TreeViewItem } from './tree-view-item.model';
 
 @Component({
     selector: 'tree-view-item',
@@ -6,7 +7,13 @@
 })
 
 export class TreeViewItemComponent {
-    @Input() treeViewItem: Object;
+    @Input() treeViewItem: TreeViewItem;
+    @Output() selectedItemChanged = new EventEmitter<Object>();
     isOpen: boolean = false;
-    constructor() { }
+    constructor() {
+        console.log(this.treeViewItem);
+    }
+    onSelected(item: Object) {
+        this.selectedItemChanged.emit(item);
+    }
 }

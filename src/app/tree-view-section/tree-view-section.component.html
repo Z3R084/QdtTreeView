@@ -1,6 +1,6 @@
 ﻿<ul>
 	<li *ngFor="let item of treeViewItems" class="entry" [ngClass]="{'entry-hover': hoverElement === item, 'selected': selectedItem === item}" 
       (mouseover)="overElement( $event, item )" (mouseout)="hoverElement = null" (click)="selectItem( $event, item )">
-		<tree-view-item [treeViewItem]="item"></tree-view-item>
+		<tree-view-item [treeViewItem]="item" (selectedItemChanged)="selectedItemChanged( $event )" [selectedItem]="selectedItem"></tree-view-item>
 	</li>
 </ul>

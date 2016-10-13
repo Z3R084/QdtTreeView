@@ -1,2 +1,6 @@
 ﻿<div (click)="isOpen = !isOpen" class="header"><i class="glyphicon" [ngClass]="{'glyphicon-chevron-right': !isOpen, 'glyphicon-chevron-down': isOpen}"></i>{{ treeViewItem.name }}</div>
-<tree-view-section *ngIf="treeViewItem.subitems.length > 0 && isOpen" [treeViewItems]="treeViewItem.subitems"></tree-view-section>
+<ul *ngIf="treeViewItem.subitems.length > 0 && isOpen" [treeViewItems]="treeViewItem.subitems">
+  <li *ngFor="let item of treeViewItem.children">
+    <tree-view-item [treeViewItem]="item"></tree-view-item>
+  </li>
+</ul>

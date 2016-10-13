@@ -1,4 +1,4 @@
-﻿import { Component, Input, trigger, state, style, transition, animate } from '@angular/core';
+﻿import { Component, Input, Output, trigger, state, style, transition, animate, EventEmitter } from '@angular/core';
 
 @Component({
     selector: 'tree-view-section',
@@ -22,7 +22,8 @@
 export class TreeViewSectionComponent {
     @Input() treeViewItems: Object[];
     hoverElement: Object;
-    selectedItem: Object;
+    @Input() selectedItem: Object;
+    @Output() onSelected = new EventEmitter<Object>();
 
     overElement($event: MouseEvent, item: Object): void {
         $event.stopPropagation();
@@ -33,7 +34,13 @@ export class TreeViewSectionComponent {
     selectItem($event: MouseEvent, item: Object): void {
         $event.stopPropagation();
         $event.preventDefault();
-        this.selectedItem = null;
         this.selectedItem = item;
+        this.onSelected.emit(this.selectedItem);
+    }
+
+    selectedItemChanged(item: Object) {
+        if (this.selectedItem !== item) {
+            this.selectedItem = null;
+        }
     }
 }

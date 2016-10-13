@@ -1,17 +1,15 @@
 ﻿import { Component, OnInit } from '@angular/core';
-import { TreeViewService } from '../tree-view.service';
+import { TreeViewModel } from './tree-view.model';
 
 @Component({
     selector: 'tree-view',
     templateUrl: './tree-view.component.html',
-    providers: [TreeViewService]
+    providers: []
 })
 
 export class TreeViewComponent implements OnInit {
     treeViewItems: Object[];
-    constructor( private treeViewService: TreeViewService ) { }
+    constructor(private treeModel: TreeViewModel) { }
 
-    ngOnInit() {
-        this.treeViewItems = this.treeViewService.getTreeViewItems();
-    }
+    ngOnInit() {}
 }

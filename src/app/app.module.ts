@@ -12,7 +12,6 @@ import { TreeViewSectionComponent } from './tree-view-section/tree-view-section.
   declarations: [
       AppComponent,
       TreeViewComponent,
-      TreeViewSectionComponent,
       TreeViewItemComponent
   ],
   imports: [
