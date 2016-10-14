@@ -1,15 +1,19 @@
-﻿import { Component, OnInit } from '@angular/core';
+﻿import { Component, OnChanges, Input } from '@angular/core';
 import { TreeViewModel } from './tree-view.model';
 
 @Component({
     selector: 'tree-view',
     templateUrl: './tree-view.component.html',
-    providers: []
+    providers: [TreeViewModel]
 })
 
-export class TreeViewComponent implements OnInit {
+export class TreeViewComponent implements OnChanges {
     treeViewItems: Object[];
-    constructor(private treeModel: TreeViewModel) { }
+    constructor(public treeModel: TreeViewModel) { }
 
-    ngOnInit() {}
+    @Input() set treeItems(treeItems: any[]) { }
+
+    ngOnChanges(changes) {
+        this.treeModel.setData({ treeItems: changes.treeItems && changes.treeItems.currentValue });
+    }
 }

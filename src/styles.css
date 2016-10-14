@@ -29,7 +29,7 @@ tree-view > div {
 	border-right: 1px solid black;
 }*/
 
-i {
+/*i {
 	padding-right: 10px;
 }
 
@@ -74,7 +74,14 @@ tree-view-section li {
 	left: 0;
 	right: 0;
 	height: 20px;
-	/*height: 25px;*/
+}
+
+tree-view-item {
+	cursor: pointer;
+}*/
+
+.selected {
+	background-color: #4cff00;
 }
 
 /*tree-view-section li:hover {
@@ -94,7 +101,3 @@ tree-view-section li:hover::before {
 	left: 0;
 	height: 22px;
 }*/
-
-tree-view-item {
-	cursor: pointer;
-}
