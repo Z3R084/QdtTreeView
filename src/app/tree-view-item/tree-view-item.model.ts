@@ -40,6 +40,10 @@ export class TreeViewItem {
         return this.getField('name');
     }
 
+    get hasChildren() {
+        return !!(this.data.hasChildren || (this.children && this.children.length > 0));
+    }
+
     getField(key) {
         return this.data[key];
     }
@@ -53,6 +57,28 @@ export class TreeViewItem {
         if (actionName === 'click') {
             this.toggleActivated();
         }
+    }
+
+    toggleExpanded() {
+        this.setIsExpanded(!this.isExpanded);
+        return this;
+    }
+
+    setIsExpanded(value: boolean) {
+        this.treeModel.setExpandedItem(this, value);
+        if (!this.children && this.hasChildren && value) {
+            this.loadChildren();
+        }
+        return this;
+    }
+
+    loadChildren() {
+        Promise.resolve(this.options.getChildren(this)).then((children) => {
+            if (children) {
+                this.setField('children', children);
+                this._initChildren();
+            }
+        });
     }
 
     focus() {

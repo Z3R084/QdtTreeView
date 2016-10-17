@@ -1,11 +1,13 @@
 ﻿import { Injectable } from '@angular/core';
 import { TreeViewItem } from '../tree-view-item/tree-view-item.model';
+import * as _ from 'lodash';
 
 @Injectable()
 export class TreeViewModel {
     roots: TreeViewItem[];
     treeItems: any[];
     expandedItemIds: { [id: string]: boolean } = {};
+    expandedItems: TreeViewItem[];
     activeItemIds: { [id: string]: boolean } = {};
     activeItems: TreeViewItem[];
     _focusedItem: TreeViewItem = null;
@@ -40,6 +42,16 @@ export class TreeViewModel {
     setFocusedItem(item: TreeViewItem) {
         this._focusedItem = item;
         this.focusedItemId = item ? item.id : null;
+    }
+
+    setExpandedItem(item: TreeViewItem, value: boolean) {
+        const index = _.indexOf(this.expandedItems, item);
+        if (value && !index) {
+            this.expandedItems.push(item);
+        } else if (index) {
+            _.pullAt(this.expandedItems, index);
+        }
+        this.expandedItemIds[item.id] = value;
     }
 
     isExpanded(node: TreeViewItem): boolean {
