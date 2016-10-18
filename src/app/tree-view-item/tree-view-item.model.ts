@@ -62,6 +62,7 @@ export class TreeViewItem {
             this.toggleActivated();
             this.toggleExpanded();
         } else if (actionName === 'over') {
+            $event.stopPropagation();
             this.hoverItem();
         } else if (actionName === 'out') {
 

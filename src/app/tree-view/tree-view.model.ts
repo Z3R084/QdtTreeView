@@ -24,6 +24,11 @@ export class TreeViewModel {
         this.update();
     }
 
+    mouseLeave() {
+        this._hoveredItem = null;
+        this.hoveredItemId = null;
+    }
+
     update() {
         let virtualRootConfig = {
             virtual: true,
