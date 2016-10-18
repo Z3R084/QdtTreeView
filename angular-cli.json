@@ -18,9 +18,7 @@
 				"styles.css",
 				"../node_modules/bootstrap/dist/css/bootstrap.css"
 			],
-					"scripts": [
-						"../node_modules/lodash/lodash.js"
-					],
+			"scripts": [],
 			"environments": {
 				"source": "environments/environment.ts",
 				"dev": "environments/environment.ts",

@@ -1,8 +1,11 @@
-﻿<div (click)="treeViewItem.mouseAction( 'click', $event )" class="header" [ngClass]="{'selected': treeViewItem.isFocused}">
-  <i class="glyphicon" [ngClass]="{'glyphicon-chevron-right': !isOpen, 'glyphicon-chevron-down': isOpen}"></i>{{ treeViewItem.displayField }}
+﻿
+<div (click)="treeViewItem.mouseAction( 'click', $event )" class="header"><!-- [ngClass]="{'selected': treeViewItem.isFocused}" -->
+  <i class="glyphicon" [ngClass]="{'glyphicon-chevron-right': !treeViewItem.isExpanded, 'glyphicon-chevron-down': treeViewItem.isExpanded}"></i>{{ treeViewItem.displayField }}
 </div>
+
 <ul *ngIf="treeViewItem.children && treeViewItem.isExpanded">
-  <li *ngFor="let item of treeViewItem.children">
+  <li *ngFor="let item of treeViewItem.children" class="entry" [ngClass]="{'selected': item.isFocused, 'entry-hover': item.isHovered}"
+      (mouseover)="item.mouseAction( 'over', $event )" (mouseout)="item.mouseAction( 'out', $event )">
     <tree-view-item [treeViewItem]="item"></tree-view-item>
   </li>
 </ul>

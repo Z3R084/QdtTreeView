@@ -12,6 +12,8 @@ export class TreeViewModel {
     activeItems: TreeViewItem[];
     _focusedItem: TreeViewItem = null;
     focusedItemId: string = null;
+    _hoveredItem: TreeViewItem = null;
+    hoveredItemId: string = null;
     virtualRoot: TreeViewItem;
     static focusedTree = null;
 
@@ -44,6 +46,11 @@ export class TreeViewModel {
         this.focusedItemId = item ? item.id : null;
     }
 
+    setHoverItem(item: TreeViewItem) {
+        this._hoveredItem = item;
+        this.hoveredItemId = item ? item.id : null;
+    }
+
     setExpandedItem(item: TreeViewItem, value: boolean) {
         const index = _.indexOf(this.expandedItems, item);
         if (value && !index) {
@@ -64,6 +71,10 @@ export class TreeViewModel {
 
     isItemFocused(item: TreeViewItem): boolean {
         return this._focusedItem === item;
+    }
+
+    isItemHovered(item: TreeViewItem): boolean {
+        return this._hoveredItem === item;
     }
 
     setActiveItem(item: TreeViewItem, value, multi = false) {

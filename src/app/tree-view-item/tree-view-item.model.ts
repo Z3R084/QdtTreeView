@@ -32,6 +32,10 @@ export class TreeViewItem {
         return this.treeModel.isItemFocused(this);
     }
 
+    get isHovered() {
+        return this.treeModel.isItemHovered(this);
+    }
+
     set id(value) {
         this.setField('id', value);
     }
@@ -56,7 +60,17 @@ export class TreeViewItem {
         this.treeModel.setFocus(true);
         if (actionName === 'click') {
             this.toggleActivated();
+            this.toggleExpanded();
+        } else if (actionName === 'over') {
+            this.hoverItem();
+        } else if (actionName === 'out') {
+
         }
+    }
+
+    hoverItem() {
+        this.treeModel.setHoverItem(this);
+        return this;
     }
 
     toggleExpanded() {
@@ -66,20 +80,20 @@ export class TreeViewItem {
 
     setIsExpanded(value: boolean) {
         this.treeModel.setExpandedItem(this, value);
-        if (!this.children && this.hasChildren && value) {
-            this.loadChildren();
-        }
+        //if (!this.children && this.hasChildren && value) {
+        //    this.loadChildren();
+        //}
         return this;
     }
 
-    loadChildren() {
-        Promise.resolve(this.options.getChildren(this)).then((children) => {
-            if (children) {
-                this.setField('children', children);
-                this._initChildren();
-            }
-        });
-    }
+    //loadChildren() {
+    //    Promise.resolve(this.options.getChildren(this)).then((children) => {
+    //        if (children) {
+    //            this.setField('children', children);
+    //            this._initChildren();
+    //        }
+    //    });
+    //}
 
     focus() {
         let prevItem = this.treeModel.getFocusedItem();

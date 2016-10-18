@@ -1,8 +1,10 @@
 ﻿<div>
-	<!--<tree-view-section [treeViewItems]="treeViewItems"></tree-view-section>-->
   <ul>
-    <li *ngFor="let item of treeModel.roots">
+    <li *ngFor="let item of treeModel.roots" class="entry" [ngClass]="{'selected': item.isFocused}">
       <tree-view-item [treeViewItem]="item"></tree-view-item>
     </li>
   </ul>
 </div>
+<!--<div class="tree-view">
+  <tree-view-item *ngFor="let item of treeModel.roots; let i = index" [treeViewItem]="item"></tree-view-item>
+</div>-->
