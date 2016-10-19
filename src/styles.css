@@ -40,6 +40,14 @@ tree-view-item {
 	height: 20px;
 }
 
+/*.animate {
+	transition: all .5s linear;
+}
+
+.rotate {
+	transform: rotate(90deg);
+}*/
+
 .entry-hover:before {
 	content: '';
 	position: absolute;
