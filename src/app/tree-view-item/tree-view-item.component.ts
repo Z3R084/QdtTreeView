@@ -13,4 +13,13 @@ export class TreeViewItemComponent {
     constructor() {
         
     }
+
+    onDragStart($event) {
+        console.log('started drag');
+    }
+
+    onDragOver($event) {
+        $event.preventDefault();
+        console.log('drag over');
+    }
 }
