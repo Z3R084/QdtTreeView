@@ -65,7 +65,7 @@ export class TreeViewItem {
             $event.stopPropagation();
             this.hoverItem();
         } else if (actionName === 'out') {
-
+            this.treeModel.mouseLeave();
         }
     }
 

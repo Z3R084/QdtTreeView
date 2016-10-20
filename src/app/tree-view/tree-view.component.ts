@@ -1,9 +1,11 @@
-﻿import { Component, OnChanges, Input } from '@angular/core';
+﻿import { Component, OnChanges, Input, ViewEncapsulation } from '@angular/core';
 import { TreeViewModel } from './tree-view.model';
 
 @Component({
     selector: 'tree-view',
     templateUrl: './tree-view.component.html',
+    styleUrls: ['./tree-view.component.less'],
+    encapsulation: ViewEncapsulation.None,
     providers: [TreeViewModel]
 })
 

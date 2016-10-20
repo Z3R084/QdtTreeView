@@ -1,0 +1,49 @@
+﻿.tree-view {
+	position: relative;
+	width: 200px;
+	border-right: 1px solid black;
+	height: 100%;
+}
+
+ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+
+	li {
+		padding: 0 10px;
+
+		tree-view-item {
+			cursor: pointer;
+		}
+	}
+}
+
+.entry:before {
+	content: '';
+	position: absolute;
+	background-color: inherit;
+	left: 0;
+	right: 0;
+	height: 20px;
+	transition: background-color .3s linear;
+}
+
+.selected:before {
+	content: '';
+	position: absolute;
+	background-color: #d8f6f7;
+	left: 0;
+	right: 0;
+	height: 20px;
+}
+
+.entry-hover:before {
+	content: '';
+	position: absolute;
+	background-color: #b5b5b5;
+	left: 0;
+	right: 0;
+	height: 20px;
+	/*height: 25px;*/
+}
