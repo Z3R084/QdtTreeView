@@ -1,7 +1,8 @@
 ﻿<div class="tree-view">
   <ul>
     <li *ngFor="let item of treeModel.roots" class="entry" [ngClass]="{'selected': item.isFocused, 'entry-hover': item.isHovered}"
-        (mouseover)="item.mouseAction( 'over', $event )" (mouseleave)="item.mouseAction( 'out', $event )">
+        (mouseover)="item.mouseAction( 'over', $event )" (mouseleave)="item.mouseAction( 'out', $event )" [dragula]="'bag-one'"
+        [dragulaModel]="treeModel.roots">
       <tree-view-item [treeViewItem]="item"></tree-view-item>
     </li>
   </ul>

@@ -1,6 +1,5 @@
 ﻿
-<div (click)="treeViewItem.mouseAction( 'click', $event )" (dragstart)="onDragStart( $event )"
-      (dragover)="onDragOver( $event )" class="header"><!-- [ngClass]="{'selected': treeViewItem.isFocused}" -->
+<div (click)="treeViewItem.mouseAction( 'click', $event )" class="header"><!-- [ngClass]="{'selected': treeViewItem.isFocused}" -->
   <i class="glyphicon" *ngIf="treeViewItem.children"
      [ngClass]="{'glyphicon-chevron-right': !treeViewItem.isExpanded, 'glyphicon-chevron-down': treeViewItem.isExpanded}"></i>
   <span *ngIf="!treeViewItem.children" class="expander-placeholder"></span>
