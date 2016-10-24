@@ -6,7 +6,7 @@
   {{ treeViewItem.displayField }}
 </div>
 
-<ul *ngIf="treeViewItem.children && treeViewItem.isExpanded">
+<ul *ngIf="treeViewItem.children && treeViewItem.isExpanded" [dragula]="'tree-drag'" [dragulaModel]="treeViewItem.children">
   <li *ngFor="let item of treeViewItem.children" class="entry" [ngClass]="{'selected': item.isFocused, 'entry-hover': item.isHovered}"
       (mouseover)="item.mouseAction( 'over', $event )" (mouseleave)="item.mouseAction( 'out', $event )">
     <tree-view-item [treeViewItem]="item"></tree-view-item>
