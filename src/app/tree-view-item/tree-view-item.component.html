@@ -1,14 +1,16 @@
 ﻿
-<div (click)="treeViewItem.mouseAction( 'click', $event )" class="header"><!-- [ngClass]="{'selected': treeViewItem.isFocused}" -->
+<div (click)="treeViewItem.mouseAction( 'click', $event )" class="header" draggable="true"
+     (dragstart)="onDragStart( $event )" (dragend)="onDragEnd()"
+     (dragover)="onDragOver( $event )" (dragleave)="onDragLeave($event)"><!-- [ngClass]="{'selected': treeViewItem.isFocused}" -->
   <i class="glyphicon" *ngIf="treeViewItem.children"
      [ngClass]="{'glyphicon-chevron-right': !treeViewItem.isExpanded, 'glyphicon-chevron-down': treeViewItem.isExpanded}"></i>
   <span *ngIf="!treeViewItem.children" class="expander-placeholder"></span>
   {{ treeViewItem.displayField }}
 </div>
 
-<ul *ngIf="treeViewItem.children && treeViewItem.isExpanded" [dragula]="'tree-drag'" [dragulaModel]="treeViewItem.children">
-  <li *ngFor="let item of treeViewItem.children" class="entry" [ngClass]="{'selected': item.isFocused, 'entry-hover': item.isHovered}"
+<ul *ngIf="treeViewItem.children && treeViewItem.isExpanded">
+  <li *ngFor="let item of treeViewItem.children; let i = index" class="entry" [ngClass]="{'selected': item.isFocused, 'entry-hover': item.isHovered}"
       (mouseover)="item.mouseAction( 'over', $event )" (mouseleave)="item.mouseAction( 'out', $event )">
-    <tree-view-item [treeViewItem]="item"></tree-view-item>
+    <tree-view-item [treeViewItem]="item" [treeItemIndex]="i"></tree-view-item>
   </li>
 </ul>

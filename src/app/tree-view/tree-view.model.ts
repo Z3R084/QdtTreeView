@@ -12,6 +12,8 @@ export class TreeViewModel {
     activeItems: TreeViewItem[];
     _focusedItem: TreeViewItem = null;
     focusedItemId: string = null;
+    _dragItem: { item: TreeViewItem, index: number } = null;
+    _dropLocation: { component: any, item: TreeViewItem, index: number } = null;
     _hoveredItem: TreeViewItem = null;
     hoveredItemId: string = null;
     virtualRoot: TreeViewItem;
@@ -46,6 +48,14 @@ export class TreeViewModel {
         return this._focusedItem;
     }
 
+    getDragItem(): { item: TreeViewItem, index: number } {
+        return this._dragItem || { item: null, index: null };
+    }
+
+    getDropLocation(): { component: any, item: TreeViewItem, index: number } {
+        return this._dropLocation || { component: null, item: null, index: null };
+    }
+
     setFocusedItem(item: TreeViewItem) {
         this._focusedItem = item;
         this.focusedItemId = item ? item.id : null;
@@ -64,6 +74,14 @@ export class TreeViewModel {
             _.pullAt(this.expandedItems, index);
         }
         this.expandedItemIds[item.id] = value;
+    }
+
+    setDragItem(dragItem: { item: TreeViewItem, index: number }) {
+        this._dragItem = dragItem;
+    }
+
+    setDropLocation(dropLocation: { component: any, item: TreeViewItem, index: number }) {
+        this._dropLocation = dropLocation;
     }
 
     isExpanded(node: TreeViewItem): boolean {

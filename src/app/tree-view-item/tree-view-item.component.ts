@@ -9,17 +9,26 @@ import { TreeViewItem } from './tree-view-item.model';
 
 export class TreeViewItemComponent {
     @Input() treeViewItem: TreeViewItem;
-   
+    @Input() treeItemIndex: number;
+
     constructor() {
-        
+
     }
 
     onDragStart($event) {
-        console.log('started drag');
+        setTimeout(() => this.treeViewItem.treeModel.setDragItem({ item: this.treeViewItem.parent, index: this.treeItemIndex }), 30);
+    }
+
+    onDragEnd() {
+        this.treeViewItem.treeModel.setDragItem(null);
     }
 
     onDragOver($event) {
         $event.preventDefault();
-        console.log('drag over');
+        this.treeViewItem.treeModel.setDropLocation({ component: this, item: this.treeViewItem, index: this.treeItemIndex });
+    }
+
+    onDragLeave($event) {
+
     }
 }
