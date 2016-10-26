@@ -66,6 +66,8 @@ export class TreeViewItem {
             this.hoverItem();
         } else if (actionName === 'out') {
             this.treeModel.mouseLeave();
+        } else if (actionName === 'drop') {
+            this.treeModel.moveItem({ from: this.treeModel.getDragItem(), to: data });
         }
     }
 
@@ -109,6 +111,14 @@ export class TreeViewItem {
 
     setIsActive(value, multi = false) {
         this.treeModel.setActiveItem(this, value, multi);
+    }
+
+    isDescendantOf(item: TreeViewItem) {
+        if (this === item) {
+            return true;
+        } else {
+            return this.parent && this.parent.isDescendantOf(item);
+        }
     }
 
     toggleActivated(multi = false) {

@@ -100,11 +100,47 @@ export class TreeViewModel {
         return this._hoveredItem === item;
     }
 
+    isDraggingOver(component) {
+        console.log(this.getDropLocation().component === component);
+        return this.getDropLocation().component === component;
+    }
+
     setActiveItem(item: TreeViewItem, value, multi = false) {
         if (value) {
             item.focus();
         }
         this._setActiveItemSingle(item, value);
+    }
+
+    canMoveItem({ from, to }) {
+        if (from.item === to.item && from.index === to.index) {
+            return false;
+        }
+
+        const fromChildren = from.item.children;
+        const fromItem = fromChildren[from.index];
+
+        return !to.item.isDescendantOf(fromItem);
+    }
+
+    moveItem({ from, to }) {
+        if (!this.canMoveItem({ from, to })) {
+            return;
+        }
+
+        const fromChildren = from.item.getField('children');
+
+        if (!to.item.getField('children')) {
+            to.item.setField('children', []);
+        }
+        const toChildren = to.item.getField('children');
+
+        const item = fromChildren.splice(from.index, 1)[0];
+        let toIndex = (from.item === to.item && to.index > from.index) ? to.index - 1 : to.index;
+
+        toChildren.splice(toIndex, 0, item);
+        this.update();
+
     }
 
     _setActiveItemSingle(item: TreeViewItem, value) {

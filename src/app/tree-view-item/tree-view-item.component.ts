@@ -28,7 +28,20 @@ export class TreeViewItemComponent {
         this.treeViewItem.treeModel.setDropLocation({ component: this, item: this.treeViewItem, index: this.treeItemIndex });
     }
 
-    onDragLeave($event) {
+    onDragLeave(itemContentWrapper, $event) {
+        if (this.treeViewItem.treeModel.isDraggingOver(this)) {
+            return;
+        }
 
+        const rect = itemContentWrapper.getBoundingClientRect();
+        if ($event.clientX < rect.left || $event.clientX > rect.right ||
+            $event.clientY < rect.top || $event.clientY > rect.bottom) {
+            this.treeViewItem.treeModel.setDropLocation(null);
+        }
+    }
+
+    onDrop($event) {
+        $event.preventDefault();
+        this.treeViewItem.mouseAction('drop', $event, { item: this.treeViewItem, index: 0 });
     }
 }
