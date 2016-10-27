@@ -1,18 +1,24 @@
-﻿
-<div (click)="treeViewItem.mouseAction( 'click', $event )" class="header" [ngClass]="{'is-dragging-over': treeViewItem.treeModel.isDraggingOver( this )}" 
-     draggable="true" #itemContentWrapper
-     (dragstart)="onDragStart( $event )" (dragend)="onDragEnd()"
-     (dragover)="onDragOver( $event )" (dragleave)="onDragLeave(itemContentWrapper, $event)"
-     (drop)="onDrop( $event )"><!-- [ngClass]="{'selected': treeViewItem.isFocused}" -->
-  <i class="glyphicon" *ngIf="treeViewItem.children"
-     [ngClass]="{'glyphicon-chevron-right': !treeViewItem.isExpanded, 'glyphicon-chevron-down': treeViewItem.isExpanded}"></i>
-  <span *ngIf="!treeViewItem.children" class="expander-placeholder"></span>
-  {{ treeViewItem.displayField }}
+﻿<div *ngIf="treeItemIndex === 0" class="drop-slot" [ngClass]="{'drag-over': treeViewItem.parent.treeModel.isDraggingOver( this )}"
+     (dragover)="onDragOverSlot( $event, treeItemIndex )" (dragleave)="onDragLeaveSlot()" (ondrop)="onDropSlot( $event, treeItemIndex )"></div>
+<div (click)="treeViewItem.mouseAction( 'click', $event )" class="header" [ngClass]="{'is-dragging-over': treeViewItem.treeModel.isDraggingOver( this )}"
+		 draggable="true" #itemContentWrapper
+		 (dragstart)="onDragStart( $event )" (dragend)="onDragEnd()"
+		 (dragover)="onDragOver( $event )" (dragleave)="onDragLeave(itemContentWrapper, $event)"
+		 (drop)="onDrop( $event )">
+	<!-- [ngClass]="{'selected': treeViewItem.isFocused}" -->
+	<i class="glyphicon" *ngIf="treeViewItem.hasChildren"
+		 [ngClass]="{'glyphicon-chevron-right': !treeViewItem.isExpanded, 'glyphicon-chevron-down': treeViewItem.isExpanded}"></i>
+	<span *ngIf="!treeViewItem.hasChildren" class="expander-placeholder"></span>
+	{{ treeViewItem.displayField }}
 </div>
 
-<ul *ngIf="treeViewItem.children && treeViewItem.isExpanded">
-  <li *ngFor="let item of treeViewItem.children; let i = index" class="entry" [ngClass]="{'selected': item.isFocused, 'entry-hover': item.isHovered}"
-      (mouseover)="item.mouseAction( 'over', $event )" (mouseleave)="item.mouseAction( 'out', $event )">
-    <tree-view-item [treeViewItem]="item" [treeItemIndex]="i"></tree-view-item>
-  </li>
-</ul>
+<div *ngIf="treeViewItem.isExpanded">
+	<ul *ngIf="treeViewItem.children">
+		<li *ngFor="let item of treeViewItem.children; let i = index" class="entry" [ngClass]="{'selected': item.isFocused, 'entry-hover': item.isHovered}"
+				(mouseover)="item.mouseAction( 'over', $event )" (mouseleave)="item.mouseAction( 'out', $event )">
+			<tree-view-item [treeViewItem]="item" [treeItemIndex]="i"></tree-view-item>
+		</li>
+	</ul>
+	<div class="drop-slot" [ngClass]="{'drag-over': treeViewItem.parent.treeModel.isDraggingOver( this )}"
+       (dragover)="onDragOverSlot( $event, treeItemIndex + 1 )" (dragleave)="onDragLeaveSlot()" (ondrop)="onDropSlot( $event, treeItemIndex + 1 )"></div>
+</div>

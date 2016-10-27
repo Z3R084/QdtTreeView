@@ -1,4 +1,4 @@
-﻿import { Component, Input, Output, EventEmitter } from '@angular/core';
+﻿import { Component, Input, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
 import { TreeViewItem } from './tree-view-item.model';
 
 @Component({
@@ -43,5 +43,21 @@ export class TreeViewItemComponent {
     onDrop($event) {
         $event.preventDefault();
         this.treeViewItem.mouseAction('drop', $event, { item: this.treeViewItem, index: 0 });
+    }
+
+    onDragOverSlot($event, index) {
+        $event.preventDefault();
+        this.treeViewItem.parent.treeModel.setDropLocation({ component: this, item: this.treeViewItem.parent, index: index });
+    }
+
+    onDragLeaveSlot() {
+        if (this.treeViewItem.parent.treeModel.isDraggingOver(this)) {
+            this.treeViewItem.parent.treeModel.setDropLocation(null);
+        }
+    }
+
+    onDropSlot($event, index) {
+        $event.preventDefault();
+        this.treeViewItem.parent.mouseAction('drop', $event, { item: this.treeViewItem.parent, index: index });
     }
 }

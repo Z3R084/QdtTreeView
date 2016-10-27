@@ -101,7 +101,6 @@ export class TreeViewModel {
     }
 
     isDraggingOver(component) {
-        console.log(this.getDropLocation().component === component);
         return this.getDropLocation().component === component;
     }
 
@@ -154,5 +153,10 @@ export class TreeViewModel {
 
     setFocus(value: boolean) {
         TreeViewModel.focusedTree = value ? this : null;
+    }
+
+    cancelDrag() {
+        this.setDropLocation(null);
+        this.setDragItem(null);
     }
 }

@@ -68,6 +68,7 @@ export class TreeViewItem {
             this.treeModel.mouseLeave();
         } else if (actionName === 'drop') {
             this.treeModel.moveItem({ from: this.treeModel.getDragItem(), to: data });
+            this.treeModel.cancelDrag();
         }
     }
 
