@@ -25,6 +25,7 @@ export class TreeViewItemComponent {
 
     onDragOver($event) {
         $event.preventDefault();
+        console.log(this);
         this.treeViewItem.treeModel.setDropLocation({ component: this, item: this.treeViewItem, index: this.treeItemIndex });
     }
 
@@ -47,6 +48,7 @@ export class TreeViewItemComponent {
 
     onDragOverSlot($event, index) {
         $event.preventDefault();
+        console.log(this);
         this.treeViewItem.parent.treeModel.setDropLocation({ component: this, item: this.treeViewItem.parent, index: index });
     }
 

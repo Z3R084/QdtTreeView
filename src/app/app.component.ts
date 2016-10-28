@@ -12,7 +12,9 @@ export class AppComponent {
             name: 'root1',
             children: [
                 { id: 2, name: 'child1' },
-                { id: 3, name: 'child2' }
+                { id: 3, name: 'child2' },
+                { id: 8, name: 'child3' },
+                { id: 9, name: 'child4' }
             ]
         },
         {

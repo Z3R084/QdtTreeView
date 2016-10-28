@@ -1,5 +1,6 @@
-﻿<div *ngIf="treeItemIndex === 0" class="drop-slot" [ngClass]="{'drag-over': treeViewItem.parent.treeModel.isDraggingOver( this )}"
-     (dragover)="onDragOverSlot( $event, treeItemIndex )" (dragleave)="onDragLeaveSlot()" (ondrop)="onDropSlot( $event, treeItemIndex )"></div>
+﻿<!--<div *ngIf="treeItemIndex === 0" class="drop-slot-first" [ngClass]="{'drag-over-first': treeViewItem.parent.treeModel.isDraggingOver( this )}"
+     (dragover)="onDragOverSlot( $event, treeItemIndex )" (dragleave)="onDragLeaveSlot()" (drop)="onDropSlot( $event, treeItemIndex )"></div>-->
+<tree-view-drop-slot *ngIf="treeItemIndex === 0" [treeViewItem]="treeViewItem.parent" [treeItemIndex]="treeItemIndex"></tree-view-drop-slot>
 <div (click)="treeViewItem.mouseAction( 'click', $event )" class="header" [ngClass]="{'is-dragging-over': treeViewItem.treeModel.isDraggingOver( this )}"
 		 draggable="true" #itemContentWrapper
 		 (dragstart)="onDragStart( $event )" (dragend)="onDragEnd()"
@@ -19,6 +20,7 @@
 			<tree-view-item [treeViewItem]="item" [treeItemIndex]="i"></tree-view-item>
 		</li>
 	</ul>
-	<div class="drop-slot" [ngClass]="{'drag-over': treeViewItem.parent.treeModel.isDraggingOver( this )}"
-       (dragover)="onDragOverSlot( $event, treeItemIndex + 1 )" (dragleave)="onDragLeaveSlot()" (ondrop)="onDropSlot( $event, treeItemIndex + 1 )"></div>
 </div>
+<tree-view-drop-slot [treeViewItem]="treeViewItem.parent" [treeItemIndex]="treeItemIndex + 1"></tree-view-drop-slot>
+<!--<div class="drop-slot" [ngClass]="{'drag-over': treeViewItem.parent.treeModel.isDraggingOver( this )}"
+		 (dragover)="onDragOverSlot( $event, treeItemIndex + 1 )" (dragleave)="onDragLeaveSlot()" (drop)="onDropSlot( $event, treeItemIndex + 1 )"></div>-->
