@@ -1,2 +1,2 @@
-﻿<div class="drop-slot" [ngClass]="{'drag-over': treeViewItem.treeModel.isDraggingOver( this )}"
+﻿<div class="drop-slot" [ngClass]="{'drag-over': treeViewItem.treeModel.isDraggingOver( this ), 'entry-first': treeItemIndex === 0}"
      (drop)="onDrop( $event )" (dragover)="onDragOver( $event )" (dragleave)="onDragLeave()"></div>

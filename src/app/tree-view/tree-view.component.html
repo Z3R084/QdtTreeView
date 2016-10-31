@@ -1,6 +1,7 @@
 ﻿<div class="tree-view">
   <ul>
-    <li *ngFor="let item of treeModel.roots; let i = index" class="entry" [ngClass]="{'selected': item.isFocused, 'entry-hover': item.isHovered}"
+    <li *ngFor="let item of treeModel.roots; let i = index" class="entry" 
+        [ngClass]="{'selected': item.isFocused, 'entry-hover': item.isHovered, 'first-entry': i === 0}"
         (mouseover)="item.mouseAction( 'over', $event )" (mouseleave)="item.mouseAction( 'out', $event )">
       <tree-view-item [treeViewItem]="item" [treeItemIndex]="i"></tree-view-item>
     </li>

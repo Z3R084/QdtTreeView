@@ -7,13 +7,14 @@ import { DragulaModule } from 'ng2-dragula/ng2-dragula';
 import { AppComponent } from './app.component';
 import { TreeViewComponent } from './tree-view/tree-view.component';
 import { TreeViewItemComponent } from './tree-view-item/tree-view-item.component';
-import { TreeViewSectionComponent } from './tree-view-section/tree-view-section.component';
+import { TreeViewDropSlot } from './tree-view-drop-slot/tree-view-drop-slot.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         TreeViewComponent,
-        TreeViewItemComponent
+        TreeViewItemComponent,
+        TreeViewDropSlot
     ],
     imports: [
         BrowserModule,

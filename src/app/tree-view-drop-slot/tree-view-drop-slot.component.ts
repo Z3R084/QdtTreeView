@@ -1,4 +1,5 @@
 ﻿import { Component, Input, Output, trigger, state, style, transition, animate, EventEmitter } from '@angular/core';
+import { TreeViewItem } from '../tree-view-item/tree-view-item.model';
 
 @Component({
     selector: 'tree-view-drop-slot',
@@ -20,28 +21,23 @@
     //]
 })
 
-export class TreeViewSectionComponent {
-    @Input() treeViewItems: Object[];
-    hoverElement: Object;
-    @Input() selectedItem: Object;
-    @Output() onSelected = new EventEmitter<Object>();
+export class TreeViewDropSlot {
+    @Input() treeViewItem: TreeViewItem;
+    @Input() treeItemIndex: number;
 
-    overElement($event: MouseEvent, item: Object): void {
-        $event.stopPropagation();
-        //$event.preventDefault();
-        this.hoverElement = item;
-    }
-
-    selectItem($event: MouseEvent, item: Object): void {
-        $event.stopPropagation();
+    onDrop($event) {
         $event.preventDefault();
-        this.selectedItem = item;
-        this.onSelected.emit(this.selectedItem);
+        this.treeViewItem.mouseAction('drop', $event, { item: this.treeViewItem, index: this.treeItemIndex });
     }
 
-    selectedItemChanged(item: Object) {
-        if (this.selectedItem !== item) {
-            this.selectedItem = null;
+    onDragOver($event) {
+        $event.preventDefault();
+        this.treeViewItem.treeModel.setDropLocation({ component: this, item: this.treeViewItem, index: this.treeItemIndex });
+    }
+
+    onDragLeave() {
+        if (this.treeViewItem.treeModel.isDraggingOver(this)) {
+            this.treeViewItem.treeModel.setDropLocation(null);
         }
     }
 }

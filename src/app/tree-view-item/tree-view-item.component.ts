@@ -25,7 +25,6 @@ export class TreeViewItemComponent {
 
     onDragOver($event) {
         $event.preventDefault();
-        console.log(this);
         this.treeViewItem.treeModel.setDropLocation({ component: this, item: this.treeViewItem, index: this.treeItemIndex });
     }
 
@@ -44,22 +43,5 @@ export class TreeViewItemComponent {
     onDrop($event) {
         $event.preventDefault();
         this.treeViewItem.mouseAction('drop', $event, { item: this.treeViewItem, index: 0 });
-    }
-
-    onDragOverSlot($event, index) {
-        $event.preventDefault();
-        console.log(this);
-        this.treeViewItem.parent.treeModel.setDropLocation({ component: this, item: this.treeViewItem.parent, index: index });
-    }
-
-    onDragLeaveSlot() {
-        if (this.treeViewItem.parent.treeModel.isDraggingOver(this)) {
-            this.treeViewItem.parent.treeModel.setDropLocation(null);
-        }
-    }
-
-    onDropSlot($event, index) {
-        $event.preventDefault();
-        this.treeViewItem.parent.mouseAction('drop', $event, { item: this.treeViewItem.parent, index: index });
     }
 }
