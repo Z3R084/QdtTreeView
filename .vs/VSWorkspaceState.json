@@ -3,9 +3,7 @@
     "",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\tree-view",
-    "\\src\\app\\tree-view-drop-slot",
     "\\src\\app\\tree-view-item"
   ],
-  "SelectedNode": "\\src\\app\\tree-view\\tree-view.component.less"
+  "SelectedNode": "\\src\\app\\tree-view-item\\tree-view-item.model.ts"
 }
