@@ -3,7 +3,7 @@
     "",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\tree-view-item"
+    "\\src\\app\\tree-view"
   ],
-  "SelectedNode": "\\src\\app\\tree-view-item\\tree-view-item.model.ts"
+  "SelectedNode": "\\src\\app\\app.component.spec.ts"
 }

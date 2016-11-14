@@ -22,6 +22,13 @@ describe('App: QDTTreeView', () => {
         expect(app).toBeTruthy();
     }));
 
+    it(`should render tree-view element`, async(() => {
+        let fixture = TestBed.createComponent(AppComponent);
+        fixture.detectChanges();
+        let compiled = fixture.debugElement.nativeElement;
+        expect(compiled.querySelector('tree-view')).not.toBeNull(); 
+    }));
+
     //it(`should have as title 'app works!'`, async(() => {
     //    let fixture = TestBed.createComponent(AppComponent);
     //    let app = fixture.debugElement.componentInstance;
