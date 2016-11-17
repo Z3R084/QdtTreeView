@@ -3,7 +3,8 @@
     "",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\tree-view"
+    "\\src\\app\\tree-view",
+    "\\src\\app\\tree-view-item"
   ],
-  "SelectedNode": "\\src\\app\\app.component.html"
+  "PreviewInSolutionExplorer": false
 }

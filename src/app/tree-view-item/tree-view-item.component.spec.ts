@@ -9,26 +9,27 @@ let element: HTMLElement;
 let item: TreeViewItem;
 
 describe('TreeViewItem: component', () => {
-    beforeEach(() => {
-        TestBed.configureTestingModule({
-            declarations: [TreeViewItemComponent],
-            schemas: [CUSTOM_ELEMENTS_SCHEMA],
-            providers: [TreeViewItem]
-        });
-        item = new TreeViewItem({ 'children': 'test123' }, null, null);
+	beforeEach(() => {
+		TestBed.configureTestingModule({
+			declarations: [TreeViewItemComponent],
+			schemas: [CUSTOM_ELEMENTS_SCHEMA],
+			providers: [TreeViewItem]
+				});
+		const treeItem = { id: 99, name: 'root' }
+		item = new TreeViewItem(treeItem, null, null);
 
-        fixture = TestBed.createComponent(TreeViewItemComponent);
-        treeViewItem = fixture.componentInstance;
-        element = fixture.debugElement.nativeElement;
-        treeViewItem.treeViewItem = item;
-        fixture.detectChanges();
-    });
+		fixture = TestBed.createComponent(TreeViewItemComponent);
+		treeViewItem = fixture.componentInstance;
+		element = fixture.debugElement.nativeElement;
+		treeViewItem.treeViewItem = item;
+		fixture.detectChanges();
+	});
 
-    it(`should create TreeViewComponent`, async(() => {
-        //let fixture = TestBed.createComponent(TreeViewItemComponent);
-        //let treeViewItem = fixture.componentInstance;
-        expect(treeViewItem).toBeTruthy();
-    }));
+	it(`should create TreeViewComponent`, async(() => {
+		//let fixture = TestBed.createComponent(TreeViewItemComponent);
+		//let treeViewItem = fixture.componentInstance;
+		expect(treeViewItem).toBeTruthy();
+	}));
 
 
 });
