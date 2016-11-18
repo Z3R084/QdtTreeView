@@ -1,27 +1,42 @@
 ﻿import { TestBed, async, ComponentFixture } from '@angular/core/testing';
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, Component, DebugElement } from '@angular/core';
+import { By } from '@angular/platform-browser';
 import { TreeViewItemComponent } from './tree-view-item.component';
 import { TreeViewItem } from './tree-view-item.model';
+import { TreeViewModel } from '../tree-view/tree-view.model';
 
-let fixture: ComponentFixture<TreeViewItemComponent>;
+@Component({
+	template: '<tree-view-item [treeViewItem]="item" [treeItemIndex]="i"></tree-view-item>',
+	providers: [TreeViewModel]
+})
+
+class TestHostComponent {
+	public treeModel: any = new TreeViewModel();
+	//treeModel.setData({
+	//	treeItems: [{ id: 99, name: 'test123' }]
+	//});
+ // item = treeModel.roots
+}
+
+let fixture: ComponentFixture<TestHostComponent>;
 let treeViewItem: TreeViewItemComponent;
-let element: HTMLElement;
-let item: TreeViewItem;
+let testHost: TestHostComponent;
+let element: DebugElement;
 
 describe('TreeViewItem: component', () => {
 	beforeEach(() => {
 		TestBed.configureTestingModule({
-			declarations: [TreeViewItemComponent],
+			declarations: [TreeViewItemComponent, TestHostComponent],
 			schemas: [CUSTOM_ELEMENTS_SCHEMA],
 			providers: [TreeViewItem]
-				});
-		const treeItem = { id: 99, name: 'root' }
-		item = new TreeViewItem(treeItem, null, null);
+		}).compileComponents();
 
-		fixture = TestBed.createComponent(TreeViewItemComponent);
-		treeViewItem = fixture.componentInstance;
-		element = fixture.debugElement.nativeElement;
-		treeViewItem.treeViewItem = item;
+		//fixture = TestBed.createComponent(TreeViewItemComponent);
+		fixture = TestBed.createComponent(TestHostComponent);
+		testHost = fixture.componentInstance;
+		//treeViewItem = fixture.componentInstance;
+		element = fixture.debugElement.query(By.css('.header'));;
+		//treeViewItem.treeViewItem = item;
 		fixture.detectChanges();
 	});
 

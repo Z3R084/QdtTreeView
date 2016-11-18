@@ -4,159 +4,161 @@ import * as _ from 'lodash';
 
 @Injectable()
 export class TreeViewModel {
-    roots: TreeViewItem[];
-    treeItems: any[];
-    expandedItemIds: { [id: string]: boolean } = {};
-    expandedItems: TreeViewItem[];
-    activeItemIds: { [id: string]: boolean } = {};
-    activeItems: TreeViewItem[];
-    _focusedItem: TreeViewItem = null;
-    focusedItemId: string = null;
-    _dragItem: { item: TreeViewItem, index: number } = null;
-    _dropLocation: { component: any, item: TreeViewItem, index: number } = null;
-    _hoveredItem: TreeViewItem = null;
-    hoveredItemId: string = null;
-    virtualRoot: TreeViewItem;
-    static focusedTree = null;
+	roots: TreeViewItem[];
+	treeItems: any[];
+	expandedItemIds: { [id: string]: boolean } = {};
+	expandedItems: TreeViewItem[];
+	activeItemIds: { [id: string]: boolean } = {};
+	activeItems: TreeViewItem[];
+	_focusedItem: TreeViewItem = null;
+	focusedItemId: string = null;
+	_dragItem: { item: TreeViewItem, index: number } = null;
+	_dropLocation: { component: any, item: TreeViewItem, index: number } = null;
+	_hoveredItem: TreeViewItem = null;
+	hoveredItemId: string = null;
+	virtualRoot: TreeViewItem;
+	static focusedTree = null;
 
-    setData({treeItems}) {
-        if (treeItems) {
-            this.treeItems = treeItems;
-        }
-        this.update();
-    }
+	setData({treeItems}) {
+		if (treeItems) {
+			this.treeItems = treeItems;
+		}
+		this.update();
+	}
 
-    mouseLeave() {
-        this._hoveredItem = null;
-        this.hoveredItemId = null;
-    }
+	mouseLeave() {
+		this._hoveredItem = null;
+		this.hoveredItemId = null;
+	}
 
-    update() {
-        let virtualRootConfig = {
-            virtual: true,
-            children: this.treeItems
-        };
-        this.virtualRoot = this.getTreeViewItem(virtualRootConfig, null);
-        this.roots = this.virtualRoot.children;
-    }
+	update() {
+		let virtualRootConfig = {
+			virtual: true,
+			children: this.treeItems
+		};
+		this.virtualRoot = this.getTreeViewItem(virtualRootConfig, null);
+		this.roots = this.virtualRoot.children;
+	}
 
-    getTreeViewItem(treeItem: any, parent: TreeViewItem) {
-        return new TreeViewItem(treeItem, parent, this);
-    }
+	getTreeViewItem(treeItem: any, parent: TreeViewItem) {
+		//treeItem = { virtual: true, children: [{ id: 99, name: 'root' }] }
+		//return new TreeViewItem(treeItem, parent, null);
+		return new TreeViewItem(treeItem, parent, this);
+	}
 
-    getFocusedItem(): TreeViewItem {
-        return this._focusedItem;
-    }
+	getFocusedItem(): TreeViewItem {
+		return this._focusedItem;
+	}
 
-    getDragItem(): { item: TreeViewItem, index: number } {
-        return this._dragItem || { item: null, index: null };
-    }
+	getDragItem(): { item: TreeViewItem, index: number } {
+		return this._dragItem || { item: null, index: null };
+	}
 
-    getDropLocation(): { component: any, item: TreeViewItem, index: number } {
-        return this._dropLocation || { component: null, item: null, index: null };
-    }
+	getDropLocation(): { component: any, item: TreeViewItem, index: number } {
+		return this._dropLocation || { component: null, item: null, index: null };
+	}
 
-    setFocusedItem(item: TreeViewItem) {
-        this._focusedItem = item;
-        this.focusedItemId = item ? item.id : null;
-    }
+	setFocusedItem(item: TreeViewItem) {
+		this._focusedItem = item;
+		this.focusedItemId = item ? item.id : null;
+	}
 
-    setHoverItem(item: TreeViewItem) {
-        this._hoveredItem = item;
-        this.hoveredItemId = item ? item.id : null;
-    }
+	setHoverItem(item: TreeViewItem) {
+		this._hoveredItem = item;
+		this.hoveredItemId = item ? item.id : null;
+	}
 
-    setExpandedItem(item: TreeViewItem, value: boolean) {
-        const index = _.indexOf(this.expandedItems, item);
-        if (value && !index) {
-            this.expandedItems.push(item);
-        } else if (index) {
-            _.pullAt(this.expandedItems, index);
-        }
-        this.expandedItemIds[item.id] = value;
-    }
+	setExpandedItem(item: TreeViewItem, value: boolean) {
+		const index = _.indexOf(this.expandedItems, item);
+		if (value && !index) {
+			this.expandedItems.push(item);
+		} else if (index) {
+			_.pullAt(this.expandedItems, index);
+		}
+		this.expandedItemIds[item.id] = value;
+	}
 
-    setDragItem(dragItem: { item: TreeViewItem, index: number }) {
-        this._dragItem = dragItem;
-    }
+	setDragItem(dragItem: { item: TreeViewItem, index: number }) {
+		this._dragItem = dragItem;
+	}
 
-    setDropLocation(dropLocation: { component: any, item: TreeViewItem, index: number }) {
-        this._dropLocation = dropLocation;
-    }
+	setDropLocation(dropLocation: { component: any, item: TreeViewItem, index: number }) {
+		this._dropLocation = dropLocation;
+	}
 
-    isExpanded(node: TreeViewItem): boolean {
-        return this.expandedItemIds[node.id];
-    }
+	isExpanded(node: TreeViewItem): boolean {
+		return this.expandedItemIds[node.id];
+	}
 
-    isActive(node: TreeViewItem) {
-        return this.activeItemIds[node.id];
-    }
+	isActive(node: TreeViewItem) {
+		return this.activeItemIds[node.id];
+	}
 
-    isItemFocused(item: TreeViewItem): boolean {
-        return this._focusedItem === item;
-    }
+	isItemFocused(item: TreeViewItem): boolean {
+		return this._focusedItem === item;
+	}
 
-    isItemHovered(item: TreeViewItem): boolean {
-        return this._hoveredItem === item;
-    }
+	isItemHovered(item: TreeViewItem): boolean {
+		return this._hoveredItem === item;
+	}
 
-    isDraggingOver(component) {
-        return this.getDropLocation().component === component;
-    }
+	isDraggingOver(component) {
+		return this.getDropLocation().component === component;
+	}
 
-    setActiveItem(item: TreeViewItem, value, multi = false) {
-        if (value) {
-            item.focus();
-        }
-        this._setActiveItemSingle(item, value);
-    }
+	setActiveItem(item: TreeViewItem, value, multi = false) {
+		if (value) {
+			item.focus();
+		}
+		this._setActiveItemSingle(item, value);
+	}
 
-    canMoveItem({ from, to }) {
-        if (from.item === to.item && from.index === to.index) {
-            return false;
-        }
+	canMoveItem({ from, to }) {
+		if (from.item === to.item && from.index === to.index) {
+			return false;
+		}
 
-        const fromChildren = from.item.children;
-        const fromItem = fromChildren[from.index];
+		const fromChildren = from.item.children;
+		const fromItem = fromChildren[from.index];
 
-        return !to.item.isDescendantOf(fromItem);
-    }
+		return !to.item.isDescendantOf(fromItem);
+	}
 
-    moveItem({ from, to }) {
-        if (!this.canMoveItem({ from, to })) {
-            return;
-        }
+	moveItem({ from, to }) {
+		if (!this.canMoveItem({ from, to })) {
+			return;
+		}
 
-        const fromChildren = from.item.getField('children');
+		const fromChildren = from.item.getField('children');
 
-        if (!to.item.getField('children')) {
-            to.item.setField('children', []);
-        }
-        const toChildren = to.item.getField('children');
+		if (!to.item.getField('children')) {
+			to.item.setField('children', []);
+		}
+		const toChildren = to.item.getField('children');
 
-        const item = fromChildren.splice(from.index, 1)[0];
-        let toIndex = (from.item === to.item && to.index > from.index) ? to.index - 1 : to.index;
+		const item = fromChildren.splice(from.index, 1)[0];
+		let toIndex = (from.item === to.item && to.index > from.index) ? to.index - 1 : to.index;
 
-        toChildren.splice(toIndex, 0, item);
-        this.update();
+		toChildren.splice(toIndex, 0, item);
+		this.update();
 
-    }
+	}
 
-    _setActiveItemSingle(item: TreeViewItem, value) {
-        this.activeItemIds = {};
-        this.activeItems = [];
-        if (value) {
-            this.activeItems.push(item);
-            this.activeItemIds[item.id] = true;
-        }
-    }
+	_setActiveItemSingle(item: TreeViewItem, value) {
+		this.activeItemIds = {};
+		this.activeItems = [];
+		if (value) {
+			this.activeItems.push(item);
+			this.activeItemIds[item.id] = true;
+		}
+	}
 
-    setFocus(value: boolean) {
-        TreeViewModel.focusedTree = value ? this : null;
-    }
+	setFocus(value: boolean) {
+		TreeViewModel.focusedTree = value ? this : null;
+	}
 
-    cancelDrag() {
-        this.setDropLocation(null);
-        this.setDragItem(null);
-    }
+	cancelDrag() {
+		this.setDropLocation(null);
+		this.setDragItem(null);
+	}
 }
