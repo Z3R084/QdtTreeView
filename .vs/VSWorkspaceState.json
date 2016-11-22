@@ -1,11 +1,8 @@
 {
   "ExpandedNodes": [
     "",
-    "\\src",
-    "\\src\\app",
-    "\\src\\app\\tree-view",
-    "\\src\\app\\tree-view-item"
+    "\\src"
   ],
-  "SelectedNode": "\\src\\app\\tree-view-item\\tree-view-item.model.ts",
+  "SelectedNode": "\\angular-cli.json",
   "PreviewInSolutionExplorer": false
 }
